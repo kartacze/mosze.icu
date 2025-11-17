@@ -18,7 +18,7 @@
   networking.defaultGateway = "193.33.111.1";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" ];
 
-  networking.firewall.allowedTCPPorts = [ 22 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 20123 ];
 
   boot.loader.grub = {
     efiSupport = true;
@@ -32,6 +32,8 @@
     pkgs.neovim
     pkgs.pgcli
     pkgs.direnv
+    pkgs.tmux
+    pkgs.livebook
   ];
 
   users.users.root.openssh.authorizedKeys.keys = [
