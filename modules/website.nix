@@ -20,8 +20,8 @@
 
     services.nginx = {
       enable = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
+      # recommendedProxySettings = true;
+      # recommendedTlsSettings = true;
 
       virtualHosts."mosze.icu" = {
         enableACME = true;
@@ -41,6 +41,41 @@
             proxy_ssl_server_name on;
             proxy_pass_header Authorization;
           '';
+        };
+
+      };
+
+      virtualHosts."live.mosze.icu" = {
+        useACMEHost = "mosze.icu";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://localhost:20123/";
+          extraConfig = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+        };
+      };
+
+      virtualHosts."test.mosze.icu" = {
+        useACMEHost = "mosze.icu";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://localhost:20123/";
+          proxyWebsockets = true; # needed if you need to use WebSocket
+          extraConfig =
+            # required when the target is also TLS server with multiple hosts
+            "proxy_ssl_server_name on;" +
+            # required when the server wants to use HTTP Authentication
+            "proxy_pass_header Authorization;";
+          # extraConfig = ''
+          #   proxy_set_header Host $host;
+          #   proxy_set_header X-Real-IP $remote_addr;
+          #   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          #   proxy_set_header X-Forwarded-Proto $scheme;
+          # '';
         };
       };
     };
