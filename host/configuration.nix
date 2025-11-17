@@ -39,7 +39,7 @@
 
   nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 
-  mosze = { website.enabled = true; };
+  mosze = { website.enable = true; };
 
   system.stateVersion = "24.05";
 }

@@ -1,7 +1,5 @@
 { lib, config, ... }: {
 
-  imports = [ ./acme.nix ];
-
   options = { mosze.website.enable = lib.mkEnableOption "enables website"; };
 
   config = lib.mkIf config.mosze.website.enable {
@@ -15,7 +13,6 @@
       ];
     };
 
-    acme.enable = true;
     security.acme.acceptTerms = true;
     security.acme.defaults.email = "teodor.pytka@gmail.com";
 
@@ -50,9 +47,6 @@
 
     # Make sure the "website" user has access to /srv/website
     # systemd.tmpfiles.rules = [ "d /srv/website 0750 website nginx" ];
-
-    # Open http and https ports to the public
-    networking.firewall.allowedTCPPorts = [ 443 ];
 
     # Make sure acme module is active for the "kyren.codes" ssl cert
 
