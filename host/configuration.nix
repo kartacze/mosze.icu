@@ -4,6 +4,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./../modules/website.nix
+    ./../modules/livebook.nix
 
   ];
 
@@ -39,7 +40,10 @@
 
   nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
 
-  mosze = { website.enable = true; };
+  mosze = {
+    website.enable = true;
+    livebook.enable = true;
+  };
 
   system.stateVersion = "24.05";
 }
