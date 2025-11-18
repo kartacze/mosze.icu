@@ -32,9 +32,13 @@
     pkgs.neovim
     pkgs.pgcli
     pkgs.direnv
-    pkgs.tmux
     pkgs.livebook
   ];
+
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+  };
 
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVcFY/yyrBFoEHfJswHYqI/A52Sw+Zg43HzA+I5+Rts"

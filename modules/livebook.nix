@@ -34,6 +34,8 @@
 
         locations."/" = {
           proxyPass = "http://localhost:20123/";
+          proxyWebsockets = true; # needed if you need to use WebSocket
+
           extraConfig = ''
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
