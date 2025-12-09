@@ -5,7 +5,7 @@
     ./disk-config.nix
     ./../modules/website.nix
     ./../modules/livebook.nix
-
+    ./../modules/actual-budget.nix
   ];
 
   networking.interfaces.ens3 = {
@@ -50,6 +50,7 @@
   mosze = {
     website.enable = true;
     livebook.enable = true;
+    actualBudget.enable = true;
   };
 
   system.stateVersion = "24.05";
