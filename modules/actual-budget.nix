@@ -29,7 +29,6 @@
 
         locations."/" = {
           proxyPass = "http://localhost:5006/";
-          forceSSL = true;
 
           # extraConfig = ''
           #   proxy_set_header Host $host;
