@@ -28,7 +28,7 @@
 
     services.nginx = {
       enable = true;
-      virtualHosts."live.mosze.icu" = {
+      virtualHosts."live.zivix.pl" = {
         enableACME = true;
         forceSSL = true;
 

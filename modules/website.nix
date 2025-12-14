@@ -24,7 +24,7 @@
       # recommendedProxySettings = true;
       # recommendedTlsSettings = true;
 
-      virtualHosts."mosze.icu" = {
+      virtualHosts."zivix.pl" = {
         enableACME = true;
         forceSSL = true;
 
