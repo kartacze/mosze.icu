@@ -37,6 +37,12 @@
       pool = {
         type = "lvm_vg";
         lvs = {
+          swap = {
+            size = "2G";
+            content = {
+              type = "swap";
+            };
+          };
           root = {
             size = "100%FREE";
             content = {

@@ -1,7 +1,12 @@
-{ lib, config, pkgs, ... }: {
+{
+  lib,
+  config,
+  ...
+}:
+{
 
   options = {
-    mosze.actualBudget.enable = lib.mkEnableOption "enables livebook";
+    mosze.actualBudget.enable = lib.mkEnableOption "enables actual-budget";
   };
 
   config = lib.mkIf config.mosze.actualBudget.enable {
@@ -9,33 +14,17 @@
     services.actual.enable = true;
     services.actual.settings.port = 5006;
 
-    # Open https port to the public
-    networking.firewall.allowedTCPPorts = [ 443 ];
-
-    # Make sure acme module is active for the "kyren.codes" ssl cert
-    # acme.enable = true;
-
-    # services.nginx.virtualHosts."budget.kyren.codes" = {
-    #   useACMEHost = "kyren.codes";
-    #   forceSSL = true;
-    #   locations."/".proxyPass = "http://localhost:5006/";
-    # };
-
     services.nginx = {
       enable = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
       virtualHosts."actual.zivix.pl" = {
         enableACME = true;
         forceSSL = true;
 
         locations."/" = {
-          proxyPass = "http://localhost:5006/";
-
-          # extraConfig = ''
-          #   proxy_set_header Host $host;
-          #   proxy_set_header X-Real-IP $remote_addr;
-          #   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          #   proxy_set_header X-Forwarded-Proto $scheme;
-          # '';
+          proxyPass = "http://127.0.0.1:5006/";
+          proxyWebsockets = true;
         };
       };
     };
